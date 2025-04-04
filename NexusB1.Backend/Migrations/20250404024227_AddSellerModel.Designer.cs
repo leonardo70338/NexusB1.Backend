@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NexusB1.Backend.Data;
 
@@ -11,9 +12,11 @@ using NexusB1.Backend.Data;
 namespace NexusB1.Backend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250404024227_AddSellerModel")]
+    partial class AddSellerModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,15 +37,14 @@ namespace NexusB1.Backend.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("CommissionPercentage")
-                        .HasPrecision(4, 2)
-                        .HasColumnType("decimal(4,2)");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
@@ -66,12 +68,6 @@ namespace NexusB1.Backend.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("SellerId");
-
-                    b.HasIndex("Email")
-                        .IsUnique();
-
-                    b.HasIndex("SlpCode")
-                        .IsUnique();
 
                     b.ToTable("Sellers");
                 });

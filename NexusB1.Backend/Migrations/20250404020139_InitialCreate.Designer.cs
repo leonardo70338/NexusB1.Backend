@@ -11,7 +11,7 @@ using NexusB1.Backend.Data;
 namespace NexusB1.Backend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250404010436_InitialCreate")]
+    [Migration("20250404020139_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -23,26 +23,6 @@ namespace NexusB1.Backend.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("NexusB1.Backend.Models.InventoryItem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("InventoryItems");
-                });
 #pragma warning restore 612, 618
         }
     }
